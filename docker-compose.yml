@@ -1,7 +1,7 @@
 services:
-  master:
+  database:
     image: mysql:8.0
-    container_name: spotify_master
+    container_name: spotify_database
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -9,24 +9,9 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./master_data:/var/lib/mysql
-      - ./master.cnf:/etc/mysql/conf.d/master.cnf
+      - ./spotify_data:/var/lib/mysql
+      - ./spotify.cnf:/etc/mysql/conf.d/spotify.cnf
 
-  slave:
-    image: mysql:8.0
-    container_name: spotify_slave
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: spotify
-    ports:
-      - "3307:3306"
-    depends_on:
-      - master
-    volumes:
-      - ./slave_data:/var/lib/mysql
-      - ./slave.cnf:/etc/mysql/conf.d/slave.cnf
 
 volumes:
-  master_data:
-  slave_data:
+  spotify_data:

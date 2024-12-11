@@ -1,4 +1,0 @@
-[mysqld]
-server-id=2
-relay_log=relay-log
-replicate_do_db=spotify
